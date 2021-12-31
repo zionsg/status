@@ -24,7 +24,7 @@ informed
 
 ## Workflow
 - `briefed`: Informed via message or email.
-- `inspect`: Reviewing document.
+- `vetting`: Reviewing document.
 - `checked`: Document reviewed.
 - `vouched`: Document approved.
 
