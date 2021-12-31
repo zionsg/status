@@ -5,15 +5,34 @@ whether in an API response or in a database table.
 
 Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 
-## Values
+success
+informed
+
+## Beginning
 - `started`: Job started.
-- `stopped`: Job stopped.
-- `pending`: In progress.
-- `success`: Job completed with success.
-- `failure`: Job failed to complete or ended with error.
+- `ordered`: Item ordered.
+- `shipped`: Item shipped.
+- `prepped`: Ready to act.
+
+## In Progress
+- `pending`: In progress, waiting for update.
+- `loading`: Loading something huge which may take a while.
+- `tidying`: Processing.
+- `sending`: Uploading.
+- `getting`: Downloading.
+- `syncing`: Synchronizing.
+
+## Workflow
+- `briefed`: Informed via message or email.
 - `inspect`: Reviewing document.
 - `checked`: Document reviewed.
 - `vouched`: Document approved.
+
+## Ending
+- `killing`: Cancelling job.
+- `stopped`: Job stopped or cancelled.
+- `success`: Job completed with success.
+- `failure`: Job failed to complete or ended with error.
 - `settled`: Job completed without indication of success or failure.
 - `unknown`: This can be used when the status of an external API response cannot
   be resolved to one of the standard values.
