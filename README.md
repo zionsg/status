@@ -31,6 +31,7 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 - `stopped`: Job stopped or cancelled.
 - `success`: Job completed with success.
 - `failure`: Job failed to complete or ended with error.
-- `settled`: Job completed without indication of success or failure.
+- `settled`: Job completed without indication of success or failure,
+  e.g. case closed.
 - `unknown`: This can be used when the status of an external API response cannot
   be resolved to one of the standard values.
