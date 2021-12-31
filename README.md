@@ -5,9 +5,6 @@ whether in an API response or in a database table.
 
 Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 
-success
-informed
-
 ## Beginning
 - `started`: Job started.
 - `ordered`: Item ordered.
