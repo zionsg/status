@@ -13,6 +13,7 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 
 ## In Progress
 - `pending`: In progress, waiting for update.
+- `cloning`: Cloning a resource.
 - `loading`: Loading something huge which may take a while.
 - `tidying`: Processing.
 - `sending`: Uploading.
