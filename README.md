@@ -17,7 +17,7 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 - `loading`: Loading something huge which may take a while.
 - `girding`: Preparing.
 - `prepped`: Prepared.
-- `tidying`: Processing.
+- `dealing`: Processing.
 - `treated`: Processed, completed processing.
 - `sending`: Uploading.
 - `getting`: Downloading.
