@@ -9,14 +9,14 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 - `started`: Job started.
 - `ordered`: Item ordered.
 - `shipped`: Item shipped.
-- `prepped`: Ready to act.
+- `readied`: Ready to act.
 
 ## In Progress
 - `pending`: In progress, waiting for update.
 - `cloning`: Cloning a resource.
 - `loading`: Loading something huge which may take a while.
 - `girding`: Preparing.
-- `readied`: Prepared, made ready for next task.
+- `prepped`: Prepared.
 - `tidying`: Processing.
 - `treated`: Processed, completed processing.
 - `sending`: Uploading.
