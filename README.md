@@ -15,13 +15,17 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 - `pending`: In progress, waiting for update.
 - `cloning`: Cloning a resource.
 - `loading`: Loading something huge which may take a while.
+- `girding`: Preparing.
+- `readied`: Prepared, made ready for next task.
 - `tidying`: Processing.
+- `treated`: Processed, completed processing.
 - `sending`: Uploading.
 - `getting`: Downloading.
 - `syncing`: Synchronizing.
 
 ## Workflow
 - `briefed`: Informed via message or email.
+- `deputed`: Assigned user to work on document.
 - `vetting`: Reviewing document.
 - `checked`: Document reviewed.
 - `vouched`: Document approved.
