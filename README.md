@@ -28,7 +28,8 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 
 ## Ending
 - `killing`: Cancelling job.
-- `stopped`: Job stopped or cancelled.
+- `stopped`: Job stopped but interim results may still be saved or returned.
+- `aborted`: Job cancelled without saving anything.
 - `success`: Job completed with success.
 - `failure`: Job failed to complete or ended with error.
 - `settled`: Job completed without indication of success or failure,
