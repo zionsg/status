@@ -17,12 +17,26 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 - `loading`: Loading something huge which may take a while.
 - `girding`: Preparing.
 - `prepped`: Prepared.
-- `dealing`: Processing.
-- `treated`: Processed, completed processing.
-- `sending`: Uploading.
+- `parsing`: Processing.
+- `handled`: Processed, completed processing.
 - `getting`: Downloading.
 - `fetched`: Downloaded.
 - `syncing`: Synchronizing.
+
+## Uploading
+- This warrants a section by itself. When a user uploads files via a webpage
+  in a browser, whether via a `<input type="file">` filepicker element or
+  dragging files/folders into a drop zone, there are 3 stages:
+    + `reading`: Browser reads the files from the user's computer. Note that if
+      the filepicker element is used to select a large amount of files,
+      e.g. 15000 files in a folder, the webpage may freeze for a few minutes
+      until all the files are read to return `HTMLInputElement.files`. On the
+      other hand, drag & drop does not appear to freeze the page as it returns
+      `DragEvent.dataTransfer.items` on the drop event.
+    + `sending`: Browser sends the files to a backend server, typically via a
+      HTTP request to an API endpoint.
+    + `storing`: Backend server stores the files on a storage system, typically
+      the local filesystem or remote cloud storage.
 
 ## Workflow
 - `briefed`: Informed via message or email.
