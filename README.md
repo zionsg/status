@@ -21,6 +21,7 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 - `treated`: Processed, completed processing.
 - `sending`: Uploading.
 - `getting`: Downloading.
+- `fetched`: Downloaded.
 - `syncing`: Synchronizing.
 
 ## Workflow
