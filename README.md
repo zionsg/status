@@ -42,5 +42,5 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
   be resolved to one of the standard values.
 
 --------------------------------------------------------------------------------
-P.S. If you are searching for 2 same-length words to mark the beginning and
-end of a block of code, try `begin` and `close` (^ v ^)
+P.S. If you are searching for 2 same-length words to mark the start and end
+of a block of code, try `begin` and `close` (^ v ^)
