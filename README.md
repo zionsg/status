@@ -33,7 +33,7 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
         * If the filepicker element is used, the webpage may freeze for a
           few minutes until all the files are read to return
           `HTMLInputElement.files`.
-        * If drag & drop is used, it does not freeze the page as
+        * If drag & drop is used, the page does not freeze when
           `DragEvent.dataTransfer.items` is accessed on the
           drop event. It is not known if the page will freeze if
           `DragEvent.dataTransfer.files` is accessed instead.
