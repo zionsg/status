@@ -27,12 +27,16 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 - This warrants a section by itself. When a user uploads files via a webpage
   in a browser, whether via a `<input type="file">` filepicker element or
   dragging files/folders into a drop zone, there are 3 stages:
-    + `reading`: Browser reads the files from the user's computer. Note that if
-      the filepicker element is used to select a large amount of files,
-      e.g. 15000 files in a folder, the webpage may freeze for a few minutes
-      until all the files are read to return `HTMLInputElement.files`. On the
-      other hand, drag & drop does not appear to freeze the page as it returns
-      `DragEvent.dataTransfer.items` on the drop event.
+    + `reading`: Browser reads the files from the user's computer. Note the
+      differences between the various upload methods for an upload involving
+      huge no. of files, e.g. 15000 files in multiple folders:
+        * If the filepicker element is used, the webpage may freeze for a
+          few minutes until all the files are read to return
+          `HTMLInputElement.files`.
+        * If drag & drop is used, it does not freeze the page as
+          `DragEvent.dataTransfer.items` is accessed on the
+          drop event. It is not known if the page will freeze if
+          `DragEvent.dataTransfer.files` is accessed instead.
     + `sending`: Browser sends the files to a backend server, typically via a
       HTTP request to an API endpoint. The XMLHttpRequest progress event may
       be used to track the progress for this stage. The Fetch API currently does
