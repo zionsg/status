@@ -34,9 +34,13 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
       other hand, drag & drop does not appear to freeze the page as it returns
       `DragEvent.dataTransfer.items` on the drop event.
     + `sending`: Browser sends the files to a backend server, typically via a
-      HTTP request to an API endpoint.
+      HTTP request to an API endpoint. The XMLHttpRequest progress event may
+      be used to track the progress for this stage. The Fetch API currently does
+      not support progress events.
     + `storing`: Backend server stores the files on a storage system, typically
-      the local filesystem or remote cloud storage.
+      the local filesystem or remote cloud storage. It should not be assumed
+      that each file will be stored successfully hence it would be good to
+      have progress updates for this stage as well.
 
 ## Workflow
 - `briefed`: Informed via message or email.
