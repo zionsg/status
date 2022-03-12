@@ -28,7 +28,7 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
   in a browser, whether via a `<input type="file">` filepicker element or
   dragging files/folders into a drop zone, there are 3 stages:
     + `reading`: Browser reads the files from the user's computer. Note the
-      differences between the various upload methods for an upload involving
+      differences between the various upload methods for an upload involving a
       huge no. of files, e.g. 15000 files in multiple folders:
         * If the filepicker element is used, the webpage may freeze for a
           few minutes until all the files are read to return
