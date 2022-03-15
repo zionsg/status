@@ -27,9 +27,10 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 - This warrants a section by itself. When a user uploads files via a webpage
   in a browser, whether via a `<input type="file">` filepicker element or
   dragging files/folders into a drop zone, there are 3 stages:
-    + `reading`: Browser reads the files from the user's computer. Note the
-      differences between the various upload methods for an upload involving a
-      huge no. of files, e.g. 15000 files in multiple folders:
+    + `reading`: Browser reads the files from the user's computer. Browser tab
+      and session must not be closed at this stage. Note the differences between
+      the various upload methods for an upload involving a huge no. of files,
+      e.g. 15000 files in multiple folders:
         * If the filepicker element is used, the webpage may freeze for a
           few minutes until all the files are read to return
           `HTMLInputElement.files`.
@@ -38,13 +39,15 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
           drop event. It is not known if the page will freeze if
           `DragEvent.dataTransfer.files` is accessed instead.
     + `sending`: Browser sends the files to a backend server, typically via a
-      HTTP request to an API endpoint. The XMLHttpRequest progress event may
-      be used to track the progress for this stage. The Fetch API currently does
-      not support progress events.
+      HTTP request to an API endpoint. Browser tab and session must not be
+      closed at this stage. The XMLHttpRequest progress event may be used to
+      track the progress for this stage. The Fetch API currently does not
+      support progress events.
     + `storing`: Backend server stores the files on a storage system, typically
-      the local filesystem or remote cloud storage. It should not be assumed
-      that each file will be stored successfully hence it would be good to
-      have progress updates for this stage as well.
+      the local filesystem or remote cloud storage. Browser tab and session may
+      be closed at this stage. It should not be assumed that each file will be
+      stored successfully hence it would be good to have progress updates for
+      this stage as well, e.g. via progress callbacks from the storage system.
 
 ## Workflow
 - `briefed`: Informed via message or email.
