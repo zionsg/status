@@ -30,7 +30,7 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
     + `reading`: Browser reads the files from the user's computer. Browser tab
       and session must not be closed at this stage. Note the differences between
       the various upload methods for an upload involving a huge no. of files,
-      e.g. 15000 files in multiple folders:
+      e.g. 100,000 files in multiple folders:
         * If the filepicker element is used, the webpage may freeze for a
           few minutes until all the files are read to return
           `HTMLInputElement.files`.
