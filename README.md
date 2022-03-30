@@ -26,7 +26,7 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 ## Uploading
 - This warrants a section by itself. When a user uploads files via a webpage
   in a browser, whether via a `<input type="file">` filepicker element or
-  dragging files/folders into a drop zone, there are 3 stages:
+  dragging files/folders into a drop zone, there are 4 stages:
     + `reading`: Browser reads the files from the user's computer. Browser tab
       and session must not be closed at this stage. Note the differences between
       the various upload methods for an upload involving a huge no. of files,
@@ -38,6 +38,20 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
           `DragEvent.dataTransfer.items` is accessed on the
           drop event. It is not known if the page will freeze if
           `DragEvent.dataTransfer.files` is accessed instead.
+    + `parsing`: Client-side code in the browser prepares the payload for
+      the `multipart/form-data` POST request, typically a `FormData` object. 
+      This is not instant, as it involves running the code below which would
+      take longer if there is a huge no. of files:
+
+            let formData = new FormData();
+            [...files].forEach((file, fileIndex) => { // file is of File type
+                formData.append('files[]', file);
+                formData.append(
+                   'filepaths[]',
+                    file.relativePath || file.webkitRelativePath || file.name
+                );
+            });
+
     + `sending`: Browser sends the files to a backend server, typically via a
       HTTP request to an API endpoint. Browser tab and session must not be
       closed at this stage. The XMLHttpRequest progress event may be used to
