@@ -40,8 +40,9 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
           `DragEvent.dataTransfer.files` is accessed instead.
     + `parsing`: Client-side code in the browser prepares the payload for
       the `multipart/form-data` POST request, typically a `FormData` object. 
-      This is not instant, as it involves running the code below which would
-      take longer if there is a huge no. of files:
+      Browser tab and session must not be closed at this stage. This involves
+      running of the sample code below which would take longer if there is a 
+      huge no. of files:
 
             let formData = new FormData();
             [...files].forEach((file, fileIndex) => { // file is of File type
