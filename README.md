@@ -1,7 +1,8 @@
 # Standard status values
 
 Suggested standard list of 7-letter words that can be used in a `status` field,
-whether in an API response or in a database table.
+whether in an API response or in a database table. Always store/return/compare
+statuses in lowercase to reduce coding errors.
 
 Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 
