@@ -90,6 +90,22 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 - `unknown`: This can be used when the status of an external API response cannot
   be resolved to one of the standard values.
 
+## Audit Columns
+- The statuses above can be used for naming audit columns in database tables
+  as well, typically in the format `<status>_at` for a TIMESTAMP column to
+  indicate when the record reached that status (this gives more information than
+  a `is_<status>` column), and `<status>_by` for a INTEGER UNSIGNED column to
+  indicate the ID of the user who made the record reach that status.
+  The 4 most common audit columns are as listed below.
+- `created`: Record created. Columns: `created_at`, `created_by`.
+- `updated`: Record updated. Columns: `updated_at`, `updated_by`.
+- `deleted`: Record marked as deleted. Columns: `deleted_at`, `deleted_by`.
+  A NULL value for `deleted_at` would imply that the record is not marked as
+  deleted.
+- `disabled`: Record disabled/suspended/deactivated. Columns: `disabled_at`,
+  `disabled_by`. A NULL value for `disabled_at` would imply that the record is
+  not disabled.
+
 --------------------------------------------------------------------------------
 P.S. If you are searching for 2 same-length words to mark the start and end
 of a block of code, try `BEGIN` and `CLOSE` (^ v ^)
