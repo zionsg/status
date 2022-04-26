@@ -94,7 +94,7 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 - The statuses above can be used for naming audit columns in database tables
   as well, typically in the format `<status>_at` for a TIMESTAMP column to
   indicate when the record reached that status (this gives more information than
-  a `is_<status>` column), and `<status>_by` for a INTEGER UNSIGNED column to
+  a `is_<status>` column), and `<status>_by` for a INT UNSIGNED column to
   indicate the ID of the user who made the record reach that status.
 - If any of the `*_at` audit columns is used in a UNIQUE index,
   e.g. `UNIQUE(username, deleted_at)` in the `actor` table (for user records),
@@ -114,11 +114,13 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
     + `created`: Record created. Columns: `created_at`, `created_by`.
     + `updated`: Record updated. Columns: `updated_at`, `updated_by`.
     + `deleted`: Record marked as deleted. Columns: `deleted_at`, `deleted_by`.
-      A NULL value for `deleted_at` would imply that the record is not marked as
-      deleted.
+      A value of NULL/0 for `deleted_at` would imply that the record is not
+      marked as deleted. Soft-deleted records, i.e. those marked as deleted,
+      are usually subject to hard-deletion via cron jobs, i.e. purging from the
+      database such that the records do not exist or take up space anymore.
     + `disabled`: Record disabled/suspended/deactivated. Columns: `disabled_at`,
-      `disabled_by`. A NULL value for `disabled_at` would imply that the record
-      is not disabled.
+      `disabled_by`. A value of NULL/0for `disabled_at` would imply that the
+      record is not disabled.
 
 --------------------------------------------------------------------------------
 P.S. If you are searching for 2 same-length words to mark the start and end
