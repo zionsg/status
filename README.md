@@ -96,15 +96,29 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
   indicate when the record reached that status (this gives more information than
   a `is_<status>` column), and `<status>_by` for a INTEGER UNSIGNED column to
   indicate the ID of the user who made the record reach that status.
-  The 4 most common audit columns are as listed below.
-- `created`: Record created. Columns: `created_at`, `created_by`.
-- `updated`: Record updated. Columns: `updated_at`, `updated_by`.
-- `deleted`: Record marked as deleted. Columns: `deleted_at`, `deleted_by`.
-  A NULL value for `deleted_at` would imply that the record is not marked as
-  deleted.
-- `disabled`: Record disabled/suspended/deactivated. Columns: `disabled_at`,
-  `disabled_by`. A NULL value for `disabled_at` would imply that the record is
-  not disabled.
+- If any of the `*_at` audit columns is used in a UNIQUE index,
+  e.g. `UNIQUE(username, deleted_at)` in the `actor` table (for user records),
+  it is recommended that INT UNSIGNED NOT NULL datatype be used instead of
+  TIMESTAMP NULL, with 0 as the default value and the values being the UNIX
+  timestamp in seconds. This is due to MySQL treating NULL values as distinct,
+  i.e. NULL != NULL, which would result in duplicate records,
+  e.g. `('garfield', NULL)`, `('garfield', NULL)`, `('garfield', 1650852966)`
+  would still be allowed with the `UNIQUE(username, deleted_at)` constraint.
+  In such a case, for consistency's sake especially during coding,
+  it would be better for all the audit columns in the database to use the
+  INT UNSIGNED NOT NULL datatype. BIGINT UNSIGNED is not recommended as it uses
+  8 bytes versus 4 bytes for INT/TIMESTAMP datatypes.
+  See https://medium.com/@aleksandrasays/dealing-with-mysql-nulls-and-unique-constraint-d260f6b40e60
+  for more info.
+- The 4 most common audit columns are as listed below.
+    + `created`: Record created. Columns: `created_at`, `created_by`.
+    + `updated`: Record updated. Columns: `updated_at`, `updated_by`.
+    + `deleted`: Record marked as deleted. Columns: `deleted_at`, `deleted_by`.
+      A NULL value for `deleted_at` would imply that the record is not marked as
+      deleted.
+    + `disabled`: Record disabled/suspended/deactivated. Columns: `disabled_at`,
+      `disabled_by`. A NULL value for `disabled_at` would imply that the record
+      is not disabled.
 
 --------------------------------------------------------------------------------
 P.S. If you are searching for 2 same-length words to mark the start and end
