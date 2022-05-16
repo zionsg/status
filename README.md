@@ -102,7 +102,7 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
   TIMESTAMP NULL, with 0 as the default value and the values being the UNIX
   timestamp in seconds. This is due to MySQL treating NULL values as distinct,
   i.e. NULL != NULL, which would result in duplicate records,
-  e.g. `('garfield', NULL)`, `('garfield', NULL)`, `('garfield', 1650852966)`
+  e.g. `('cat', NULL), ('cat', NULL), ('cat', 0), ('cat', 1650852966)`
   would still be allowed with the `UNIQUE(username, deleted_at)` constraint.
   In such a case, for consistency's sake especially during coding,
   it would be better for all the audit columns in the database to use the
@@ -119,7 +119,7 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
       are usually subject to hard-deletion via cron jobs, i.e. purging from the
       database such that the records do not exist or take up space anymore.
     + `disabled`: Record disabled/suspended/deactivated. Columns: `disabled_at`,
-      `disabled_by`. A value of NULL/0for `disabled_at` would imply that the
+      `disabled_by`. A value of NULL/0 for `disabled_at` would imply that the
       record is not disabled.
 
 --------------------------------------------------------------------------------
