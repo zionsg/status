@@ -74,10 +74,11 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 
 ## Workflow
 - `briefed`: Informed via message or email.
-- `deputed`: Assigned user to work on document.
+- `deputed`: Assigned user to work on document/request.
 - `vetting`: Reviewing document.
-- `checked`: Document reviewed.
-- `vouched`: Document approved.
+- `checked`: Document/request reviewed.
+- `refused`: Document/request rejected.
+- `allowed`: Document/request approved.
 
 ## Ending
 - `killing`: Cancelling job.
