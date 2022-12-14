@@ -80,6 +80,7 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 - `checked`: Document/request reviewed.
 - `refused`: Document/request rejected.
 - `allowed`: Document/request approved.
+- `expired`: Document expired.
 
 ## Ending
 - `killing`: Cancelling job.
