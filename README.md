@@ -95,9 +95,9 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 
 ## Audit Columns
 - The statuses above can be used for naming audit columns in database tables
-  as well, typically in the format `<status>_at` for a TIMESTAMP column to
+  as well, typically in the format `<status>_at` for a `TIMESTAMP` column to
   indicate when the record reached that status (this gives more information than
-  a `is_<status>` column), and `<status>_by` for a INT UNSIGNED column to
+  a `is_<status>` column), and `<status>_by` for a `INT` column to
   indicate the ID of the user who made the record reach that status.
 - If any of the `*_at` audit columns is used in a UNIQUE index,
   e.g. `UNIQUE(username, deleted_at)` in the `actor` table (for user records),
