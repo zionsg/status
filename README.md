@@ -105,30 +105,30 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
   instead of `TIMESTAMP NULL`, with 0 as the default value and the values being 
   the UNIX timestamp in seconds/milliseconds/microseconds (at least millisecond
   precision recommended as many things can happen within the same second). This 
-  is due to MySQL treating NULL values as distinct, i.e. NULL != NULL, which 
-  would result in duplicate records, 
+  is due to MySQL treating `NULL` values as distinct, i.e. `NULL != NULL`, 
+  which would result in duplicate records, 
   e.g. `('cat', NULL), ('cat', NULL), ('cat', 0), ('cat', 1650852966)`
   would still be allowed with the `UNIQUE(username, deleted_at)` constraint.
   In such a case, for consistency's sake especially during coding,
   it would be better for all the audit columns in the database to use
-  `BIGINT NOT NULL DEFAULT '0'` for the datatype. UNSIGNED is not used as
+  `BIGINT NOT NULL DEFAULT '0'` for the datatype. `UNSIGNED` is not used as
   it is not a valid datatype in the ANSI SQL standard, which means PostgreSQL
-  would not support it. INT datatype not recommended as it is prone to the 
+  would not support it. `INT` datatype not recommended as it is prone to the 
   [Year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem) without
-  use of UNSIGNED. See 
+  use of `UNSIGNED`. See 
   https://medium.com/@aleksandrasays/dealing-with-mysql-nulls-and-unique-constraint-d260f6b40e60
   for more info.
 - The 4 most common audit columns are as listed below.
     + `created`: Record created. Columns: `created_at`, `created_by`.
     + `updated`: Record updated. Columns: `updated_at`, `updated_by`.
     + `deleted`: Record marked as deleted. Columns: `deleted_at`, `deleted_by`.
-      A value of NULL or 0 for `deleted_at` would imply that the record is not
+      A value of `NULL` or 0 for `deleted_at` would imply that the record is not
       marked as deleted. Soft-deleted records, i.e. those marked as deleted,
       are usually subject to hard-deletion via cron jobs, i.e. purging from the
       database such that the records do not exist or take up space anymore.
     + `disabled`: Record disabled/suspended/deactivated. Columns: `disabled_at`,
-      `disabled_by`. A value of NULL or 0 for `disabled_at` would imply that the
-      record is not disabled.
+      `disabled_by`. A value of `NULL` or 0 for `disabled_at` would imply that 
+      the record is not disabled.
 
 --------------------------------------------------------------------------------
 P.S. If you are searching for 2 same-length words to mark the start and end
