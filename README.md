@@ -78,6 +78,7 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
 - `request`: Request for review of document/ticket.
 - `vetting`: Reviewing document/ticket.
 - `inquiry`: Asking owner of document/ticket for more information.
+- `revised`: Corrected classification predicted using machine learning model.
 - `checked`: Document/ticket reviewed.
 - `refused`: Document/ticket rejected.
 - `allowed`: Document/ticket approved.
