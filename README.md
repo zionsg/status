@@ -27,7 +27,9 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
 ## Uploading
 - This warrants a section by itself. When a user uploads files via a webpage
   in a browser, whether via a `<input type="file">` filepicker element or
-  dragging files/folders into a drop zone, there are 4 stages:
+  dragging files/folders into a 
+  [drop zone](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop), 
+  there are typically 4 stages:
     + `reading`: Browser reads the files from the user's computer. Browser tab
       and session must not be closed at this stage. Note the differences between
       the various upload methods for an upload involving a huge no. of files,
@@ -78,6 +80,9 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
       be closed at this stage. It should not be assumed that each file will be
       stored successfully hence it would be good to have progress updates for
       this stage as well, e.g. via progress callbacks from the storage system.
+      The backend may do additional processing after storing the files, 
+      e.g. indexing and inference, for which the progress would be reported
+      under this stage as well.
 
 ## Workflow
 - `briefed`: Informed via message or email.
