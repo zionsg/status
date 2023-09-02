@@ -4,7 +4,7 @@ Suggested standard list of 7-letter words that can be used in a `status` field,
 whether in an API response or in a database table. Always store/return/compare
 statuses in lowercase to reduce coding errors.
 
-Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
+Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
 
 ## Beginning
 - `started`: Job started.
@@ -33,8 +33,9 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
       the various upload methods for an upload involving a huge no. of files,
       e.g. 100,000 files across multiple folders:
         * If the filepicker element is used, the webpage may freeze for a
-          few minutes until all the files are read to return
-          `HTMLInputElement.files`.
+          few minutes after selecting the folder/files, until all the files are 
+          read to populate `HTMLInputElement.files` (even if the property is
+          not accessed).
         * If drag & drop is used, the page does not freeze noticeably when
           `DragEvent.dataTransfer.items` is accessed on the
           drop event. It is not known if the page will freeze if
@@ -47,14 +48,20 @@ Why 7 letters? Cos it all started with "success", "failure" and "pending" :)
       running of the sample code below which would take longer if there is a 
       huge no. of files:
 
-            let formData = new FormData();
-            [...files].forEach((file, fileIndex) => { // file is of File type
-                formData.append('files[]', file);
-                formData.append(
-                   'filepaths[]',
-                    file.relativePath || file.webkitRelativePath || file.name
-                );
-            });
+          ```
+          let formData = new FormData();
+          [...files].forEach((file, fileIndex) => { // file is of File type
+              formData.append('files[]', file);
+              formData.append(
+                 'filepaths[]',
+                  file.relativePath || file.webkitRelativePath || file.name
+              );
+              formData.append(
+                  'file_modified_timestamps[]',
+                  file.lastModified
+              );
+          });
+          ```
 
     + `sending`: Browser sends the files to a backend server, typically via a
       HTTP request to an API endpoint. Browser tab and session must not be
