@@ -48,20 +48,20 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
       running of the sample code below which would take longer if there is a 
       huge no. of files:
 
-          ```
-          let formData = new FormData();
-          [...files].forEach((file, fileIndex) => { // file is of File type
-              formData.append('files[]', file);
-              formData.append(
-                 'filepaths[]',
-                  file.relativePath || file.webkitRelativePath || file.name
-              );
-              formData.append(
-                  'file_modified_timestamps[]',
-                  file.lastModified
-              );
-          });
-          ```
+      ```
+      let formData = new FormData();
+      [...files].forEach((file, fileIndex) => { // file is of File type
+          formData.append('files[]', file);
+          formData.append(
+             'filepaths[]',
+              file.relativePath || file.webkitRelativePath || file.name
+          );
+          formData.append(
+              'file_modified_timestamps[]',
+              file.lastModified
+          );
+      });
+      ```
 
     + `sending`: Browser sends the files to a backend server, typically via a
       HTTP request to an API endpoint. Browser tab and session must not be
