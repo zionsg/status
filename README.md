@@ -27,15 +27,15 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
 ## Uploading
 - This warrants a section by itself. When a user uploads files via a webpage
   in a browser, whether via a `<input type="file">` filepicker element or
-  dragging files/folders into a 
-  [drop zone](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop), 
+  dragging files/folders into a
+  [drop zone](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop),
   there are typically 4 stages:
     + `reading`: Browser reads the files from the user's computer. Browser tab
       and session must not be closed at this stage. Note the differences between
       the various upload methods for an upload involving a huge no. of files,
       e.g. 100,000 files across multiple folders:
         * If the filepicker element is used, the webpage may freeze for a
-          few minutes after selecting the folder/files, until all the files are 
+          few minutes after selecting the folder/files, until all the files are
           read to populate `HTMLInputElement.files` (even if the property is
           not accessed).
         * If drag & drop is used, the page does not freeze noticeably when
@@ -45,9 +45,9 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
         * Note that DataTransfer items do not persist thru async calls.
           See https://stackoverflow.com/a/59244780 for more info.
     + `parsing`: Client-side code in the browser prepares the payload for
-      the `multipart/form-data` POST request, typically a `FormData` object. 
+      the `multipart/form-data` POST request, typically a `FormData` object.
       Browser tab and session must not be closed at this stage. This involves
-      running of the sample code below which would take longer if there is a 
+      running of the sample code below which would take longer if there is a
       huge no. of files:
 
       ```
@@ -73,20 +73,25 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
         * Note that there may be multiple progress events fired for the same
           upload request where `event.loaded` is the same as `event.total`,
           hence it may be safer to compare with the total bytes uploaded if
-          progress percentage is to be computed. See 
+          progress percentage is to be computed. See
           https://stackoverflow.com/q/66976081 for more info.
     + `storing`: Backend server stores the files on a storage system, typically
       the local filesystem or remote cloud storage. Browser tab and session may
       be closed at this stage. It should not be assumed that each file will be
       stored successfully hence it would be good to have progress updates for
       this stage as well, e.g. via progress callbacks from the storage system.
-      The backend may do additional processing after storing the files, 
-      e.g. indexing and inference, for which the progress would be reported
-      under this stage as well.
+        * The backend may do additional processing after storing the files,
+          e.g. indexing and inference, for which the progress would be reported
+          under this stage as well. The processing is not split into additional
+          stages as the backend server would usually only provide a single API
+          endpoint for the browser to poll for progress all the way to the end,
+          e.g. `http://localhost:10000/api/job/:id/progress`, instead of 1 for
+          storing, 1 for indexing, 1 for inference, etc.
 
 ## Workflow
 - `briefed`: Informed via message or email.
 - `deputed`: Assigned user to work on document/ticket.
+- `working`: User has picked up the document and started work on it.
 - `request`: Request for review of document/ticket.
 - `vetting`: Reviewing document/ticket.
 - `inquiry`: Asking owner of document/ticket for more information.
@@ -116,20 +121,20 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
 - If any of the `*_at` audit columns is used in a UNIQUE index,
   e.g. `UNIQUE(username, deleted_at)` in the `actor` table (for user records),
   it is recommended that the datatype be set to `BIGINT NOT NULL DEFAULT '0'`
-  instead of `TIMESTAMP NULL`, with 0 as the default value and the values being 
+  instead of `TIMESTAMP NULL`, with 0 as the default value and the values being
   the UNIX timestamp in seconds/milliseconds/microseconds (at least millisecond
-  precision recommended as many things can happen within the same second). This 
-  is due to MySQL treating `NULL` values as distinct, i.e. `NULL != NULL`, 
-  which would result in duplicate records, 
+  precision recommended as many things can happen within the same second). This
+  is due to MySQL treating `NULL` values as distinct, i.e. `NULL != NULL`,
+  which would result in duplicate records,
   e.g. `('cat', NULL), ('cat', NULL), ('cat', 0), ('cat', 1650852966)`
   would still be allowed with the `UNIQUE(username, deleted_at)` constraint.
   In such a case, for consistency's sake especially during coding,
   it would be better for all the audit columns in the database to use
   `BIGINT NOT NULL DEFAULT '0'` for the datatype. `UNSIGNED` is not used as
   it is not a valid datatype in the ANSI SQL standard, which means PostgreSQL
-  would not support it. `INT` datatype not recommended as it is prone to the 
+  would not support it. `INT` datatype not recommended as it is prone to the
   [Year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem) without
-  use of `UNSIGNED`. See 
+  use of `UNSIGNED`. See
   https://medium.com/@aleksandrasays/dealing-with-mysql-nulls-and-unique-constraint-d260f6b40e60
   for more info.
 - The 4 most common audit columns are as listed below.
@@ -141,7 +146,7 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
       are usually subject to hard-deletion via cron jobs, i.e. purging from the
       database such that the records do not exist or take up space anymore.
     + `disabled`: Record disabled/suspended/deactivated. Columns: `disabled_at`,
-      `disabled_by`. A value of `NULL` or 0 for `disabled_at` would imply that 
+      `disabled_by`. A value of `NULL` or 0 for `disabled_at` would imply that
       the record is not disabled.
 
 --------------------------------------------------------------------------------
