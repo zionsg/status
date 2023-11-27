@@ -19,6 +19,7 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
 - `girding`: Preparing.
 - `prepped`: Prepared.
 - `parsing`: Processing.
+- `ignored`: Not sent for processing as it is not applicable.
 - `handled`: Processed, completed processing.
 - `getting`: Downloading.
 - `fetched`: Downloaded.
