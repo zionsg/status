@@ -92,6 +92,8 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
 ## Workflow
 - `briefed`: Informed via message or email.
 - `deputed`: Assigned user to work on document/ticket.
+- `resting`: Worker waiting for task to be assigned. Not named `waiting` so as
+  to differentiate starting letter from `working`.
 - `working`: User has picked up the document and started work on it.
 - `request`: Request for review of document/ticket.
 - `vetting`: Reviewing document/ticket.
