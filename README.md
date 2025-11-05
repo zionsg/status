@@ -155,4 +155,5 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
 
 --------------------------------------------------------------------------------
 P.S. If you are searching for 2 same-length words to mark the start and end
-of a block of code, try `BEGIN` and `CLOSE` (^ v ^)
+of a block of code which are alphabetically ordered, try `BEGIN` and `CLOSE` 
+(^ v ^)
