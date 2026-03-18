@@ -117,28 +117,32 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
 
 ## Audit Columns
 - The statuses above can be used for naming audit columns in database tables
-  as well, typically in the format `<status>_at` for a `TIMESTAMP` column to
-  indicate when the record reached that status (this gives more information than
-  a `is_<status>` column), and `<status>_by` for a `INT` column to
-  indicate the ID of the user who made the record reach that status.
+  as well, typically a `<status>_at` column (either `TIMESTAMP` or `INT`
+  datatype) to indicate when the record reached that status (this gives more
+  information than a `is_<status>` column), and a `<status>_by` column (`INT`
+  datatype) to indicate the ID of the user who made the record reach that
+  status.
 - If any of the `*_at` audit columns is used in a UNIQUE index,
   e.g. `UNIQUE(username, deleted_at)` in the `actor` table (for user records),
-  it is recommended that the datatype be set to `BIGINT NOT NULL DEFAULT '0'`
-  instead of `TIMESTAMP NULL`, with 0 as the default value and the values being
-  the UNIX timestamp in seconds/milliseconds/microseconds (millisecond
-  precision recommended as many things can happen within the same second). This
-  is due to MySQL treating `NULL` values as distinct, i.e. `NULL != NULL`,
-  which would result in duplicate records,
+  it is recommended that the datatype be set to `INT NOT NULL DEFAULT '0'`
+  instead of `TIMESTAMP NULL`, storing the UNIX timestamp in seconds with 0 as
+  the default value. This is due to MySQL treating `NULL` values as distinct,
+  i.e. `NULL != NULL`, which would result in duplicate records,
   e.g. `('cat', NULL), ('cat', NULL), ('cat', 0), ('cat', 1650852966)`
   would still be allowed with the `UNIQUE(username, deleted_at)` constraint.
     + In such a case, for consistency's sake especially during coding,
       it would be better for all the audit columns in the database to use
-      `BIGINT NOT NULL DEFAULT '0'` for the datatype. `UNSIGNED` is not used as
+      `INT NOT NULL DEFAULT '0'` for the datatype. `UNSIGNED` is not used as
       it is not a valid datatype in the ANSI SQL standard, which means
-      PostgreSQL would not support it. `INT` datatype not recommended as it is
-      prone to the
+      PostgreSQL would not support it. `BIGINT` datatype for millisecond
+      precision would take up too much storage especially if there are a lot of
+      audit columns to track many statuses, even if `INT` datatype is prone to
+      the
       [Year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem)
-      without use of `UNSIGNED`. See
+      without use of `UNSIGNED`. Millisecond precision using `BIGINT` datatype
+      would be more appropriate for the `event_at` column in the `audit` table
+      as a request may trigger many audit events within the same second.
+    + See
       https://medium.com/@aleksandrasays/dealing-with-mysql-nulls-and-unique-constraint-d260f6b40e60
       for more info.
 - The 4 most common audit columns are as listed below.
@@ -155,5 +159,5 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
 
 --------------------------------------------------------------------------------
 P.S. If you are searching for 2 same-length words to mark the start and end
-of a block of code which are alphabetically ordered, try `BEGIN` and `CLOSE` 
+of a block of code which are alphabetically ordered, try `BEGIN` and `CLOSE`
 (^ v ^)
