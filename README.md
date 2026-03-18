@@ -141,7 +141,9 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
       [Year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem)
       without use of `UNSIGNED`. Millisecond precision using `BIGINT` datatype
       would be more appropriate for the `event_at` column in the `audit` table
-      as a request may trigger many audit events within the same second.
+      as a request may trigger many audit events (typically updates to records)
+      within the same second, while lesser precision is sufficient for
+      status tracking audit columns in other tables.
     + See
       https://medium.com/@aleksandrasays/dealing-with-mysql-nulls-and-unique-constraint-d260f6b40e60
       for more info.
