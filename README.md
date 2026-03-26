@@ -155,7 +155,7 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
     + `deleted`: Record marked as deleted. Columns: `deleted_at`, `deleted_by`.
       A value of `NULL` or 0 for `deleted_at` would imply that the record is not
       marked as deleted. Soft-deleted records, i.e. those marked as deleted,
-      are usually subject to hard-deletion via cron jobs, i.e. purging from the
+      may be subject to hard-deletion via cron jobs, i.e. purging from the
       database such that the records do not exist or take up space anymore.
     + `revoked`: Record disabled/suspended/deactivated. Columns: `revoked_at`,
       `revoked_by`. A value of `NULL` or 0 for `revoked_at` would imply that
