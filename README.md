@@ -139,9 +139,11 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
       audit columns to track many statuses, even if `INT` datatype is prone to
       the
       [Year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem)
-      without use of `UNSIGNED`. Millisecond precision using `BIGINT` datatype
-      would be more appropriate for the `event_at` column in the `audit` table
-      as a request may trigger many audit events (typically updates to records)
+      without use of `UNSIGNED`.
+    + Millisecond precision using `DECIMAL(13, 3)` datatype can be used for
+      the `event_timestamp` column in the `audit` table (not named `event_at`
+      to avoid confusion as `*_at` implies UNIX timestamp in seconds) as a
+      request may trigger many audit events (typically updates to records)
       within the same second, while lesser precision is sufficient for
       status tracking audit columns in other tables.
     + See
