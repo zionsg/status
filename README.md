@@ -136,8 +136,8 @@ Why 7 letters? Cos it all started with `success`, `failure` and `pending` :)
       it is not a valid datatype in the ANSI SQL standard, which means
       PostgreSQL would not support it. `BIGINT` datatype for millisecond
       precision would take up too much storage especially if there are a lot of
-      audit columns to track many statuses, even if `INT` datatype is prone to
-      the
+      audit columns to track many statuses, hence it is not recommended even
+      though `INT` datatype is prone to the
       [Year 2038 problem](https://en.wikipedia.org/wiki/Year_2038_problem)
       without use of `UNSIGNED`.
     + Millisecond precision using `DECIMAL(13, 3)` datatype can be used for
